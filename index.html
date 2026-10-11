@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Muslima uchun 💌</title>
+<meta name="description" content="Sizga kichik bir maktub bor…">
+<meta name="theme-color" content="#fbf1e4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbf1e4;
+    --card:#fffaf3;
+    --ink:#4a2f2a;
+    --muted:#9a7b70;
+    --rose:#e0566f;
+    --red:#d7263d;
+    --clay:#c8664a;
+    --shadow:0 18px 50px -18px rgba(120,60,50,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:"Nunito",system-ui,sans-serif;
+    overflow:hidden;-webkit-tap-highlight-color:transparent;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;
+    background-image:
+      radial-gradient(circle at 12% 18%, #f3b4a9 0 4px, transparent 5px),
+      radial-gradient(circle at 85% 12%, #f5d38a 0 3px, transparent 4px),
+      radial-gradient(circle at 78% 82%, #b9d3b3 0 5px, transparent 6px),
+      radial-gradient(circle at 18% 78%, #f7c9d1 0 4px, transparent 5px),
+      radial-gradient(circle at 50% 6%, #b9d3b3 0 3px, transparent 4px),
+      radial-gradient(circle at 92% 50%, #f3b4a9 0 3px, transparent 4px),
+      radial-gradient(circle at 6% 50%, #f5d38a 0 3px, transparent 4px);
+  }
+
+  /* tushayotgan gulbarglar */
+  .petal{
+    position:fixed;top:-20px;pointer-events:none;z-index:0;
+    width:10px;height:14px;border-radius:60% 0 60% 0;
+    background:#f7c3cc;opacity:.7;
+    animation:fall linear infinite;
+  }
+  @keyframes fall{
+    0%{transform:translate(0,-20px) rotate(0)}
+    50%{transform:translate(var(--sway),50vh) rotate(180deg)}
+    100%{transform:translate(0,110vh) rotate(360deg)}
+  }
+
+  .stage{position:relative;height:100%;z-index:1}
+  .screen{
+    position:absolute;inset:0;display:grid;place-items:center;
+    padding:24px 16px;overflow-y:auto;
+    opacity:0;pointer-events:none;transform:translateY(16px) scale(.98);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .screen.active{opacity:1;pointer-events:auto;transform:none}
+
+  .card{
+    width:min(420px,100%);background:var(--card);border-radius:28px;
+    box-shadow:var(--shadow);padding:34px 26px 28px;text-align:center;position:relative;
+  }
+  .hand{font-family:"Caveat",cursive;font-size:24px;color:var(--clay)}
+  h1{
+    font-family:"Fraunces",serif;font-style:italic;
+    font-size:clamp(40px,11vw,56px);line-height:1.05;color:var(--rose);letter-spacing:-.5px;
+  }
+  .sub{color:var(--muted);margin-top:12px;font-size:16px;line-height:1.5}
+  .sticker{position:absolute;font-size:40px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.12));animation:wiggle 3s ease-in-out infinite}
+  @keyframes wiggle{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+
+  .btn{
+    appearance:none;border:0;cursor:pointer;
+    font:inherit;font-weight:800;font-size:17px;
+    padding:14px 28px;border-radius:999px;
+    background:var(--rose);color:#fff;
+    box-shadow:0 10px 24px -10px var(--rose);
+    transition:transform .15s ease;margin-top:24px;
+  }
+  .btn:active{transform:scale(.96)}
+  .btn.ghost{background:#efe4d6;color:var(--ink);box-shadow:none}
+
+  /* konvert */
+  .envelope{width:150px;height:104px;margin:18px auto 0;position:relative;animation:bob 2.6s ease-in-out infinite}
+  .envelope .body{position:absolute;inset:0;background:#f4a7b4;border-radius:12px}
+  .envelope .flap{position:absolute;left:0;right:0;top:0;height:62px;background:#ec8c9d;clip-path:polygon(0 0,100% 0,50% 100%);border-radius:12px 12px 0 0}
+  .envelope .seal{position:absolute;left:50%;top:46px;transform:translateX(-50%);font-size:28px}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+  /* musiqa so'rovi */
+  .ask-music .cassette{margin:22px auto 4px}
+  .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+  /* kasseta (so'rovda katta, keyin kichik pleyer) */
+  .cassette{
+    width:220px;height:136px;border-radius:14px;position:relative;
+    background:#f1dcc9;box-shadow:inset 0 0 0 3px #e6c9b0;
+  }
+  .cassette .label{
+    position:absolute;left:14px;right:14px;top:12px;height:30px;border-radius:6px;
+    background:#fde6ea;display:grid;place-items:center;
+    font-family:"Caveat",cursive;font-size:20px;color:var(--ink);
+  }
+  .cassette .window{
+    position:absolute;left:34px;right:34px;top:54px;height:44px;border-radius:22px;
+    background:#fffaf3;display:flex;align-items:center;justify-content:space-between;padding:0 10px;
+  }
+  .reel{width:30px;height:30px;border-radius:50%;border:4px dotted #8a5a4a;background:#fff}
+  .cassette .tape{position:absolute;left:66px;right:66px;top:66px;height:20px;background:#4a2f2a;border-radius:4px}
+  .playing .reel{animation:spin 2.4s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .mini{
+    position:fixed;top:calc(12px + env(safe-area-inset-top));left:50%;transform:translateX(-50%) translateY(-80px);
+    z-index:20;display:flex;align-items:center;gap:10px;
+    background:var(--card);border-radius:999px;box-shadow:var(--shadow);
+    padding:7px 14px 7px 8px;border:0;font:inherit;cursor:pointer;color:var(--ink);
+    transition:transform .5s ease;max-width:calc(100vw - 32px);
+  }
+  .mini.visible{transform:translateX(-50%)}
+  .mini .reels{display:flex;gap:3px;background:#f1dcc9;border-radius:999px;padding:5px 7px}
+  .mini .reel{width:16px;height:16px;border-width:3px}
+  .mini .t{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mini .s{font-size:12px;color:var(--muted);white-space:nowrap}
+
+  /* xabarlar */
+  .msg-card{min-height:360px;display:flex;flex-direction:column;justify-content:space-between}
+  .emoji{font-size:62px;line-height:1;display:inline-block;animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+  @keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+  .msg{
+    font-family:"Fraunces",serif;font-size:clamp(22px,6vw,27px);line-height:1.35;
+    min-height:4.2em;display:flex;align-items:center;justify-content:center;margin-top:14px;
+  }
+  .msg span{opacity:0;transform:translateY(6px);display:inline-block;transition:opacity .35s, transform .35s;white-space:pre}
+  .msg span.on{opacity:1;transform:none}
+  .progress{display:flex;gap:6px;justify-content:center;margin-top:20px}
+  .progress i{width:7px;height:7px;border-radius:99px;background:#ecdccb;transition:all .3s}
+  .progress i.on{background:var(--rose);width:20px}
+  .nav{display:flex;gap:10px;justify-content:center}
+  .nav .btn{margin-top:16px}
+
+  /* Ha / Yo'q */
+  .answers{position:relative;height:140px;margin-top:10px}
+  .answers .btn{position:absolute;top:24px}
+  #yes{left:50%;transform:translateX(-110%);transition:transform .25s ease}
+  #no{left:50%;transform:translateX(10%);transition:left .25s ease, top .25s ease}
+  .hint{font-size:15px;color:var(--muted);min-height:22px;margin-top:4px}
+
+  /* yurak */
+  .press-wrap{display:flex;flex-direction:column;align-items:center;text-align:center;width:min(420px,100%)}
+  .press-title{font-family:"Fraunces",serif;font-size:clamp(22px,6vw,28px);line-height:1.3}
+  .press-sub{color:var(--muted);margin-top:8px;font-size:15px}
+  .heart-box{
+    position:relative;width:min(330px,84vw);aspect-ratio:100/92;margin:22px 0 10px;
+    user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
+  }
+  .heart-box svg.heart{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  .heart-box.beat svg.heart{animation:beat 1s ease-in-out infinite}
+  @keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.07)}30%{transform:scale(.98)}45%{transform:scale(1.05)}}
+  .wave{animation:wave 2.2s linear infinite}
+  .wave.back{animation-duration:3.4s;animation-direction:reverse}
+  @keyframes wave{from{transform:translateX(0)}to{transform:translateX(-50px)}}
+  .finger{
+    position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);
+    width:92px;height:92px;border-radius:50%;border:0;cursor:pointer;
+    background:rgba(255,250,243,.92);display:grid;place-items:center;
+    touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
+    animation:ping 1.8s ease-out infinite;transition:transform .2s ease;
+  }
+  .finger svg{width:54px;height:54px;color:var(--rose);transition:color .3s}
+  .finger.holding{transform:translate(-50%,-50%) scale(.92);animation:none;box-shadow:0 0 0 10px rgba(224,86,111,.18)}
+  .finger.holding svg{color:var(--red)}
+  @keyframes ping{
+    0%{box-shadow:0 0 0 0 rgba(224,86,111,.45), 0 10px 26px -10px rgba(120,40,40,.5)}
+    100%{box-shadow:0 0 0 22px rgba(224,86,111,0), 0 10px 26px -10px rgba(120,40,40,.5)}
+  }
+  .percent{font-weight:800;font-size:20px;color:var(--red);min-height:28px;font-variant-numeric:tabular-nums}
+
+  /* rahmat */
+  .seal-badge{
+    width:84px;height:84px;border-radius:50%;margin:0 auto 14px;
+    background:radial-gradient(circle at 35% 30%,#f7d77a,#e2a93b);
+    display:grid;place-items:center;font-size:40px;
+    box-shadow:0 10px 24px -10px rgba(160,100,20,.6);
+    animation:pop .6s cubic-bezier(.3,1.6,.5,1);
+  }
+  .hearts-row{margin-top:16px;letter-spacing:6px;color:var(--rose);font-size:18px}
+  .hearts-row span{display:inline-block;opacity:0;animation:pop .4s forwards}
+  .date{font-size:13px;color:var(--muted);margin-top:6px}
+
+  .heart-fly{position:fixed;bottom:-40px;pointer-events:none;animation:float linear forwards;z-index:30}
+  @keyframes float{to{transform:translateY(-115vh) rotate(var(--r));opacity:0}}
+
+  @media (prefers-reduced-motion:reduce){
+    .envelope,.wave,.sticker,.petal,.heart-box.beat svg.heart{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<button class="mini" id="mini" aria-label="Musiqani to‘xtatish yoki yoqish">
+  <span class="reels"><span class="reel"></span><span class="reel"></span></span>
+  <span style="text-align:left;min-width:0">
+    <span class="t" style="display:block">Keraksan menga</span>
+    <span class="s" id="miniState">Shohjahon Jo‘rayev</span>
+  </span>
+</button>
+
+<main class="stage">
+
+  <!-- 1. Kirish -->
+  <section class="screen active" id="s-intro">
+    <div class="card">
+      <span class="sticker" style="top:-22px;right:-8px">🧸</span>
+      <p class="hand">kichik bir o‘yimni o‘qing…</p>
+      <h1 style="margin-top:6px">Muslima 💕</h1>
+      <p class="sub">Sizga aytmoqchi bo‘lgan gaplarim bor.<br>Pastdagini bosing, xo‘pmi? ✨</p>
+      <div class="envelope" aria-hidden="true">
+        <div class="body"></div><div class="flap"></div><div class="seal">💌</div>
+      </div>
+      <button class="btn" id="open">Maktubni ochish 💌</button>
+    </div>
+  </section>
+
+  <!-- 2. Musiqa so'rovi -->
+  <section class="screen" id="s-music">
+    <div class="card ask-music">
+      <p class="hand">bir iltimos…</p>
+      <h1 style="font-size:clamp(30px,8.5vw,40px);margin-top:6px">Qo‘shiqni yoqaylikmi? 🎧</h1>
+      <p class="sub">Bu gaplarni shu qo‘shiq bilan o‘qishingizni xohlardim.</p>
+      <div class="cassette" id="bigCassette">
+        <div class="label">Keraksan menga ♡</div>
+        <div class="tape"></div>
+        <div class="window"><span class="reel"></span><span class="reel"></span></div>
+      </div>
+      <div class="row">
+        <button class="btn" id="musicYes">Ha, yoqing 🎵</button>
+        <button class="btn ghost" id="musicNo">Musiqasiz</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Kichik xabarlar -->
+  <section class="screen" id="s-msg">
+    <div class="card msg-card">
+      <div>
+        <div class="emoji" id="emoji">🥺</div>
+        <p class="msg" id="msg"></p>
+      </div>
+      <div>
+        <div class="progress" id="progress"></div>
+        <div class="nav">
+          <button class="btn ghost" id="prev" aria-label="Oldingi">←</button>
+          <button class="btn" id="next">Davom etish</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Kechirasizmi? -->
+  <section class="screen" id="s-ask">
+    <div class="card">
+      <span class="sticker" style="top:-24px;left:-6px">🥹</span>
+      <p class="hand">va eng muhim savol…</p>
+      <h1 style="font-size:clamp(32px,9vw,44px);margin-top:6px">Meni kechirasizmi?</h1>
+      <div class="answers" id="answers">
+        <button class="btn" id="yes">Ha 💗</button>
+        <button class="btn ghost" id="no">Yo‘q</button>
+      </div>
+      <p class="hint" id="hint"></p>
+      <button class="btn ghost" id="askBack" style="margin-top:14px;font-size:15px;padding:10px 20px">← xabarlarga qaytish</button>
+    </div>
+  </section>
+
+  <!-- 5. Yurak -->
+  <section class="screen" id="s-press">
+    <div class="press-wrap">
+      <p class="press-title">Chin dildan kechirgan bo‘lsangiz…</p>
+      <p class="press-sub">barmog‘ingizni bosib turing, yurak to‘lguncha qo‘ymang</p>
+      <div class="heart-box" id="heartBox">
+        <svg class="heart" viewBox="0 0 100 92" aria-hidden="true">
+          <defs>
+            <clipPath id="heartClip">
+              <path d="M50 89 C21 68 3 50 3 28 C3 13 14 3 28 3 C38 3 46 9 50 17 C54 9 62 3 72 3 C86 3 97 13 97 28 C97 50 79 68 50 89Z"/>
+            </clipPath>
+            <linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ff4d6a"/>
+              <stop offset="1" stop-color="#b3122a"/>
+            </linearGradient>
+          </defs>
+          <path d="M50 89 C21 68 3 50 3 28 C3 13 14 3 28 3 C38 3 46 9 50 17 C54 9 62 3 72 3 C86 3 97 13 97 28 C97 50 79 68 50 89Z" fill="#fde6ea"/>
+          <g clip-path="url(#heartClip)">
+            <g id="level" transform="translate(0 92)">
+              <path class="wave back" fill="#f2899b" d="M0 3 Q12.5 -1 25 3 T50 3 T75 3 T100 3 T125 3 T150 3 T175 3 T200 3 V120 H0Z"/>
+              <path class="wave" fill="url(#liquid)" d="M0 4 Q12.5 0 25 4 T50 4 T75 4 T100 4 T125 4 T150 4 T175 4 T200 4 V120 H0Z"/>
+            </g>
+          </g>
+          <path d="M50 89 C21 68 3 50 3 28 C3 13 14 3 28 3 C38 3 46 9 50 17 C54 9 62 3 72 3 C86 3 97 13 97 28 C97 50 79 68 50 89Z" fill="none" stroke="#e0566f" stroke-width="1.6"/>
+        </svg>
+        <button class="finger" id="finger" aria-label="Bosib turing">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/>
+            <path d="M14 13.12c0 2.38 0 6.38-1 8.88"/>
+            <path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/>
+            <path d="M2 12a10 10 0 0 1 18-6"/>
+            <path d="M2 16h.01"/>
+            <path d="M21.8 16c.2-2 .131-5.354 0-6"/>
+            <path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/>
+            <path d="M8.65 22c.21-.66.45-1.32.57-2"/>
+            <path d="M9 6.8a6 6 0 0 1 9 5.2v2"/>
+          </svg>
+        </button>
+      </div>
+      <div class="percent" id="percent"></div>
+    </div>
+  </section>
+
+  <!-- 6. Rahmat -->
+  <section class="screen" id="s-end">
+    <div class="card">
+      <div class="seal-badge">💝</div>
+      <p class="hand">kechirganingiz uchun…</p>
+      <h1 style="font-size:clamp(34px,10vw,48px);margin-top:6px">Rahmat, Muslima</h1>
+      <p class="sub">Meni kechirganingiz men uchun juda katta gap.<br>Endi sizni xafa qilmaslikka harakat qilaman.<br>Siz men uchun juda qadrlisiz 🤍</p>
+      <div class="hearts-row" id="heartsRow"></div>
+      <p class="hand" style="margin-top:14px">doim siz bilan 💕</p>
+      <p class="date" id="date"></p>
+      <button class="btn ghost" id="again">Yana bir bor ko‘rish ↺</button>
+    </div>
+  </section>
+
+</main>
+
+<audio id="audio" src="qoshiq.m4a" loop preload="auto"></audio>
+
+<script>
+  const messages = [
+    { e: "🥺", t: "Muslima, bugun qilgan ishim uchun chin dildan afsusdaman." },
+    { e: "😔", t: "Bilaman, kechirim so‘rash bilan hammasi hal bo‘lib qolmaydi." },
+    { e: "🙏", t: "Lekin iltimos, meni kechiring." },
+    { e: "😞", t: "Men bunday bo‘lishini istamagandim, bilmasdan xato qildim." },
+    { e: "💔", t: "Sizni xafa qilishni aslo xohlamagandim." },
+    { e: "😶", t: "O‘zimni oqlamoqchi emasman, ayb menda." },
+    { e: "😢", t: "Qaniydi, bu ishni qilmaganimda edi." },
+    { e: "🫶", t: "Buni ortga qaytara olmasam ham, qilgan ishimdan juda afsusdaman." },
+    { e: "💌", t: "Muslima, iltimos, meni kechiring." }
+  ];
+
+  const $ = id => document.getElementById(id);
+  const show = id => document.querySelectorAll(".screen").forEach(s => s.classList.toggle("active", s.id === id));
+
+  /* ---------- gulbarglar ---------- */
+  for (let k = 0; k < 16; k++) {
+    const p = document.createElement("span");
+    p.className = "petal";
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.setProperty("--sway", (Math.random() * 80 - 40) + "px");
+    p.style.animationDuration = 9 + Math.random() * 8 + "s";
+    p.style.animationDelay = -Math.random() * 15 + "s";
+    p.style.transform = `scale(${0.6 + Math.random() * 0.8})`;
+    document.body.appendChild(p);
+  }
+
+  /* ---------- orqaga qaytish (telefon "orqaga" tugmasi ham ishlaydi) ---------- */
+  // har bir sahna va har bir xabar brauzer tarixiga yoziladi
+  function go(id, idx) {
+    try { history.pushState({ s: id, i: idx ?? i }, ""); } catch (e) {}
+    show(id);
+  }
+  try { history.replaceState({ s: "s-intro", i: 0 }, ""); } catch (e) {}
+  addEventListener("popstate", e => {
+    const st = e.state || { s: "s-intro", i: 0 };
+    if (st.s === "s-msg") { i = st.i; render(); }
+    show(st.s);
+  });
+
+  /* ---------- musiqa ---------- */
+  const audio = $("audio"), mini = $("mini");
+  let audioFailed = false;
+  audio.addEventListener("error", () => { audioFailed = true; setPlaying(false); });
+
+  function play() {
+    if (audioFailed) { audioFailed = false; audio.load(); }
+    // ovoz sekin balandlashadi (iPhone volume'ni o'zgartirishga ruxsat bermaydi, u yerda darhol chalinadi)
+    audio.volume = 0.05;
+    const p = audio.play();
+    if (p && p.then) p.then(() => { setPlaying(true); fadeIn(); }).catch(() => setPlaying(false));
+    else { setPlaying(true); fadeIn(); }
+  }
+  function fadeIn() {
+    const t0 = performance.now();
+    (function step(t) {
+      const k = Math.min((t - t0) / 2500, 1);
+      audio.volume = 0.05 + 0.85 * k;
+      if (k < 1 && !audio.paused) requestAnimationFrame(step);
+    })(t0);
+  }
+  function setPlaying(on) {
+    mini.classList.toggle("playing", on);
+    $("miniState").textContent = on ? "Shohjahon Jo‘rayev"
+      : audioFailed ? "qo‘shiq yuklanmadi · qayta urinish"
+      : "to‘xtatildi · yoqish uchun bosing";
+  }
+  mini.onclick = () => {
+    if (audio.paused) play();
+    else { audio.pause(); setPlaying(false); }
+  };
+
+  /* ---------- 1 → 2 → 3 ---------- */
+  $("open").onclick = () => { go("s-music"); $("bigCassette").classList.add("playing"); };
+  $("musicYes").onclick = () => { play(); beginMessages(); };
+  $("musicNo").onclick = () => { setPlaying(false); beginMessages(); };
+  function beginMessages() {
+    mini.classList.add("visible"); // musiqasiz tanlansa ham keyin yoqib olish mumkin
+    i = 0; render(); go("s-msg", 0); hearts(8);
+  }
+
+  /* ---------- kichik xabarlar ---------- */
+  let i = 0, timers = [];
+  const progress = $("progress");
+  messages.forEach(() => progress.appendChild(document.createElement("i")));
+
+  function render() {
+    timers.forEach(clearTimeout); timers = [];
+    const m = messages[i];
+    const em = $("emoji");
+    em.textContent = m.e;
+    em.style.animation = "none"; em.offsetWidth; em.style.animation = "";
+    const box = $("msg"); box.innerHTML = "";
+    const wrap = document.createElement("div");
+    m.t.split(" ").forEach((w, k, arr) => {
+      const s = document.createElement("span");
+      s.textContent = w + (k < arr.length - 1 ? " " : "");
+      wrap.appendChild(s);
+      timers.push(setTimeout(() => s.classList.add("on"), 110 * k));
+    });
+    box.appendChild(wrap);
+    [...progress.children].forEach((d, k) => d.classList.toggle("on", k === i));
+    $("prev").style.display = i === 0 ? "none" : "";
+    $("next").textContent = i === messages.length - 1 ? "Davom etish 💗" : "Davom etish";
+  }
+  $("next").onclick = () => {
+    if (i < messages.length - 1) { i++; render(); go("s-msg", i); }
+    else go("s-ask");
+  };
+  $("prev").onclick = () => history.back();
+  $("askBack").onclick = () => history.back();
+
+  /* ---------- Ha / Yo'q: "Yo'q" qochadi, "Ha" kattalashadi ---------- */
+  const noTexts = ["Rostdanmi? 🥺", "Yana bir o‘ylab ko‘ring…", "Iltimos 🙏", "Bu tugma ishlamaydi 😅", "Ha’ni bosing-da 💗", "Faqat “Ha” qoldi 🫶"];
+  let tries = 0;
+  function dodge(ev) {
+    ev.preventDefault();
+    const box = $("answers").getBoundingClientRect(), no = $("no");
+    no.style.transform = "none";
+    no.style.left = Math.random() * (box.width - no.offsetWidth) + "px";
+    no.style.top = Math.random() * (box.height - no.offsetHeight) + "px";
+    $("hint").textContent = noTexts[Math.min(tries++, noTexts.length - 1)];
+    $("yes").style.transform = `translateX(-110%) scale(${Math.min(1 + tries * 0.1, 1.6)})`;
+  }
+  ["mouseenter", "click"].forEach(t => $("no").addEventListener(t, dodge));
+  $("no").addEventListener("touchstart", dodge, { passive: false });
+  $("yes").onclick = () => { go("s-press"); hearts(12); };
+
+  /* ---------- yurak: barmoq bosib turilsa to'ladi ---------- */
+  const FILL_MS = 4500, DRAIN_MS = 7000;
+  const level = $("level"), finger = $("finger"), percent = $("percent"), heartBox = $("heartBox");
+  let fill = 0, holding = false, last = 0, done = false, lastBuzz = 0;
+
+  function setLevel() {
+    level.setAttribute("transform", `translate(0 ${(92 - fill * 98).toFixed(2)})`);
+    percent.textContent = fill > 0.005 ? Math.round(fill * 100) + "%" : "";
+  }
+  function tick(t) {
+    const dt = last ? t - last : 16; last = t;
+    if (done) return;
+    fill = Math.max(0, Math.min(1, fill + (holding ? dt / FILL_MS : -dt / DRAIN_MS)));
+    setLevel();
+    if (holding && navigator.vibrate && t - lastBuzz > 600) { navigator.vibrate(15); lastBuzz = t; }
+    if (fill >= 1) return complete();
+    if (holding || fill > 0) requestAnimationFrame(tick); else last = 0;
+  }
+  function start(e) {
+    e.preventDefault();
+    if (done) return;
+    holding = true; finger.classList.add("holding");
+    if (!last) requestAnimationFrame(tick);
+  }
+  function stop() { holding = false; finger.classList.remove("holding"); }
+
+  finger.addEventListener("pointerdown", e => { finger.setPointerCapture?.(e.pointerId); start(e); });
+  ["pointerup", "pointercancel", "lostpointercapture"].forEach(t => finger.addEventListener(t, stop));
+  finger.addEventListener("contextmenu", e => e.preventDefault());
+  finger.addEventListener("keydown", e => { if ((e.key === " " || e.key === "Enter") && !e.repeat) start(e); });
+  finger.addEventListener("keyup", stop);
+
+  function complete() {
+    done = true; stop();
+    finger.style.transition = "opacity .5s, transform .5s";
+    finger.style.opacity = "0";
+    finger.style.transform = "translate(-50%,-50%) scale(.4)";
+    heartBox.classList.add("beat");
+    percent.textContent = "Kechirdingiz 🤍";
+    if (navigator.vibrate) navigator.vibrate([60, 60, 120]);
+    hearts(50);
+    setTimeout(showThanks, 2600);
+  }
+
+  /* ---------- rahmat ---------- */
+  function showThanks() {
+    go("s-end");
+    const row = $("heartsRow"); row.innerHTML = "";
+    for (let k = 0; k < 7; k++) {
+      const s = document.createElement("span");
+      s.textContent = "❤";
+      s.style.animationDelay = 0.4 + k * 0.12 + "s";
+      row.appendChild(s);
+    }
+    const oylar = ["yanvar", "fevral", "mart", "aprel", "may", "iyun", "iyul", "avgust", "sentabr", "oktabr", "noyabr", "dekabr"];
+    const d = new Date();
+    $("date").textContent = `${d.getDate()}-${oylar[d.getMonth()]}, ${d.getFullYear()}`;
+    hearts(30);
+  }
+  $("again").onclick = () => location.reload();
+
+  /* ---------- uchuvchi yuraklar ---------- */
+  function hearts(n) {
+    const set = ["💗", "💕", "💖", "❤️", "🌸"];
+    for (let k = 0; k < n; k++) {
+      const h = document.createElement("span");
+      h.className = "heart-fly";
+      h.textContent = set[k % set.length];
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.fontSize = 16 + Math.random() * 22 + "px";
+      h.style.setProperty("--r", (Math.random() * 80 - 40) + "deg");
+      h.style.animationDuration = 4 + Math.random() * 4 + "s";
+      h.style.animationDelay = Math.random() * 1.5 + "s";
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 10000);
+    }
+  }
+</script>
+</body>
+</html>
